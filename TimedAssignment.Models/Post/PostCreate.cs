@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace TimedAssignment.Data.Entities
+namespace TimedAssignment.Models.Post
 {
-    public class PostEntity
+    public class PostCreate
     {
-        [Required]
-        public int Id;
         [Required]
         [MinLength
             (2, ErrorMessage = "{0} must be at least {1} characters long.")]
@@ -20,7 +18,5 @@ namespace TimedAssignment.Data.Entities
         [MaxLength
             (8000, ErrorMessage = "{0} must contain no more than {1} characters.")]
         public string? Text;
-        public List<CommentEntity>? Comments {get; set;}
-        Guid AuthorId {get; set;}
     }
 }

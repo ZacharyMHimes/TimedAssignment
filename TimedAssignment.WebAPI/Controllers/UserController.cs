@@ -15,6 +15,11 @@ namespace TimedAssignment.WebAPI.Controllers
     {
         private readonly IUserService _userService;
         private readonly IPostService _postService;
-        
+        public UserController(IUserService userService, IPostService postService)
+        {
+            _userService = userService;
+            _postService = postService;
+        }
+
     }
 }
