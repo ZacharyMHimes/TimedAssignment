@@ -16,8 +16,8 @@ namespace TimedAssignment.Data.Entities
     public string Username { get; set; }
     [Required]
     public string Password { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string? FirstName { get; set; } //Leaving User First and Last Nullable (?)
+    public string? LastName { get; set; } //solves some issues with non-nullable fields in SQL Db later on. -zmh
     [Required]
     public DateTime DateCreated { get; set; }
     }
