@@ -10,14 +10,14 @@ namespace TimedAssignment.Data.Entities
     public class PostEntity
     {
         [Key]
-        [Required]
         public int Id {get; set;}
         [Required]
         public string Title {get; set;}
-        [Required]
         public string? Text {get; set;}
+        [Required]
         public DateTimeOffset CreatedUtc {get; set;}
         public List<CommentEntity>? Comments {get; set;}
+        //Author Foreign Key Code
         [Required]
         [ForeignKey (nameof(Author))]
         int AuthorId {get; set;}
