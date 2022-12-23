@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TimedAssignment.Data.Entities
 {
     public class PostEntity
     {
+        [Key]
+        public int Id {get; set;}
         [Required]
-        public int Id;
+        public string Title {get; set;}
+        public string? Text {get; set;}
         [Required]
-        [MinLength
-            (2, ErrorMessage = "{0} must be at least {1} characters long.")]
-        [MaxLength
-            (100, ErrorMessage = "{0} must contain no more than {1} characters.")]
-        public string Title;
-        [Required]
-        [MaxLength
-            (8000, ErrorMessage = "{0} must contain no more than {1} characters.")]
-        public string? Text;
+        public DateTimeOffset CreatedUtc {get; set;}
         public List<CommentEntity>? Comments {get; set;}
-        Guid AuthorId {get; set;}
+        //Author Foreign Key Code
+        [Required]
+        [ForeignKey (nameof(Author))]
+        int AuthorId {get; set;}
+        [Required]
+        public UserEntity Author {get; set;}
     }
 }

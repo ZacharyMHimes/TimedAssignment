@@ -25,7 +25,7 @@ namespace TimedAssignment.Services.User
                 {
                     Email = model.Email,
                     Username = model.Username,
-                    DateCreated = DateTime.Now
+                    CreatedUtc = DateTimeOffset.Now
                 };
 
                 // var passwordHasher = new PasswordHasher<UserEntity>();
@@ -56,7 +56,7 @@ namespace TimedAssignment.Services.User
                     Username = entity.Username,
                     FirstName = entity.FirstName,
                     LastName = entity.LastName,
-                    DateCreated = entity.DateCreated
+                    CreatedUtc = entity.CreatedUtc,
                 };
 
                 return userDetail;
