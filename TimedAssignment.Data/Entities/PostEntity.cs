@@ -21,7 +21,6 @@ namespace TimedAssignment.Data.Entities
         [Required]
         [ForeignKey (nameof(Author))]
         int AuthorId {get; set;}
-        [Required]
         public UserEntity Author {get; set;}
     }
 }
