@@ -29,7 +29,7 @@ namespace TimedAssignment.WebAPI.Controllers
                 return BadRequest(ModelState);
             var tokenResponse = await _tokenService.GetTokenAsync(request);
             if (tokenResponse is null)
-                return BadRequest("Invalid username or password.")
+                return BadRequest("Invalid username or password.");
 
             return Ok(tokenResponse);
         }
