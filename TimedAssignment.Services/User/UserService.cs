@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TimedAssignment.Data;
 using TimedAssignment.Data.Entities;
@@ -28,8 +29,8 @@ namespace TimedAssignment.Services.User
                     CreatedUtc = DateTimeOffset.Now
                 };
 
-                // var passwordHasher = new PasswordHasher<UserEntity>();
-                // entity.Password = passwordHasher.HashPassword(entity, model.Password);   //* Will Complete Password hashing later.
+                var passwordHasher = new PasswordHasher<UserEntity>();
+                entity.Password = passwordHasher.HashPassword(entity, model.Password);   //* Will Complete Password hashing later.
 
                 _context.User.Add(entity);
                 var numberOfChanges = await _context.SaveChangesAsync();
