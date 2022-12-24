@@ -18,6 +18,8 @@ namespace TimedAssignment.WebAPI.Controllers
         {
             _userService = userService;
         }
+        [HttpPost("Register")]
+        
 
     }
 }
