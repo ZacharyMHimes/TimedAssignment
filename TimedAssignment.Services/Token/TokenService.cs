@@ -33,7 +33,7 @@ namespace TimedAssignment.Services.Token
             }
         private async Task<UserEntity> GetValidUserAsync(TokenRequest model)
             {
-                var userEntity = await _context.Users.FirstOrDefaultAsync(
+                var userEntity = await _context.User.FirstOrDefaultAsync(
                     user => user.Username.ToLower() == model.Username.ToLower());
                     if(userEntity is null)
                         return null;
@@ -90,4 +90,5 @@ namespace TimedAssignment.Services.Token
 
                 return claims;
             }
+        }
 }
