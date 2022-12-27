@@ -6,6 +6,7 @@ using TimedAssignment.Services.Post;
 using TimedAssignment.Services.User;
 using Microsoft.IdentityModel.Tokens;
 using TimedAssignment.Services.Token;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
