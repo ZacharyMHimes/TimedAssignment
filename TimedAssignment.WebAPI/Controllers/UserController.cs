@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TimedAssignment.Models.Token;
 using TimedAssignment.Models.User;
 using TimedAssignment.Services.Post;
 using TimedAssignment.Services.Token;
