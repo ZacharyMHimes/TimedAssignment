@@ -30,7 +30,7 @@ namespace TimedAssignment.Services.User
                 };
 
                 var passwordHasher = new PasswordHasher<UserEntity>();
-                entity.Password = passwordHasher.HashPassword(entity, model.Password);   //* Will Complete Password hashing later.
+                entity.Password = passwordHasher.HashPassword(entity, model.Password); 
 
                 _context.User.Add(entity);
                 var numberOfChanges = await _context.SaveChangesAsync();

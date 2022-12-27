@@ -24,8 +24,8 @@ namespace TimedAssignment.WebAPI.Controllers
             _tokenService = tokenService;
         }
         
-      [HttpPost("~/api/Token")]
-      public async Task<IActionResult> Token([FromBody] TokenRequest request)
+    [HttpPost("~/api/Token")]
+    public async Task<IActionResult> Token([FromBody] TokenRequest request)
         {
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
