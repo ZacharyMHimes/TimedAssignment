@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TimedAssignment.Data;
 using TimedAssignment.Data.Entities;
 using TimedAssignment.Models.Comment;
@@ -32,6 +33,23 @@ namespace TimedAssignment.Services.Comment
             return numberOfChanges == 1;
         }
         //Read
+        public async Task<List<CommentListItem>> GetCommentsByPostIdAsync(int postId)
+        {
+            var comments = await _dbContext.Comment
+                .Where( commentEntity => commentEntity.PostId == postId)
+                .Select( commentEntity => new CommentListItem {
+                    Id = commentEntity.Id,
+                    ParentPostId = commentEntity.PostId,
+                    AuthorId = commentEntity.AuthorId,
+                    Text = commentEntity.Text,
+                    CreatedUTC = commentEntity.CreatedUTC,
+                    ModifiedUTC = commentEntity.ModifiedUTC 
+                } )
+                .ToListAsync();
+            
+            return  comments;
+
+        }
         //Update
         //Delete
     }
