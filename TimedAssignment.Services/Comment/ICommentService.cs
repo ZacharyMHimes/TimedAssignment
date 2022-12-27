@@ -9,5 +9,6 @@ namespace TimedAssignment.Services.Comment
     public interface ICommentService
     {
         public Task<bool> CreateCommentAsync(CommentCreate newComment);
+        public Task<List<CommentListItem>> GetCommentsByPostIdAsync(int Id);
     }
 }
