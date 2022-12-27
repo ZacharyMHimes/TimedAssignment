@@ -15,7 +15,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<[ITokenService, TokenService]>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPostService, PostService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
