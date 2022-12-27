@@ -21,23 +21,23 @@ namespace TimedAssignment.WebAPI.Controllers
         {
             _postService = postService;
         }
-    
 
-    [HttpPost]
-    public async Task<IActionResult> CreatePost([FromBody] PostCreate request)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
 
-        Task<bool> task = _postService.CreatePostAsync(request);
-        var registerResult = await task;
-        if (registerResult)
+        [HttpPost]
+        public async Task<IActionResult> CreatePost([FromBody] PostCreate request)
         {
-            return Ok("Post submitted.");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Task<bool> task = _postService.CreatePostAsync(request);
+            var registerResult = await task;
+            if (registerResult)
+            {
+                return Ok("Post submitted.");
+            }
+            return BadRequest("Post could not be created.");
         }
-        return BadRequest("Post could not be created.");
-    }
     }
 }
