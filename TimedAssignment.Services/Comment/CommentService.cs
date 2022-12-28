@@ -25,7 +25,6 @@ namespace TimedAssignment.Services.Comment
 
             _dbContext = context;
         }
-        // [Authorize]
         //Create
         public async Task<bool> CreateCommentAsync(CommentCreate request)
         {

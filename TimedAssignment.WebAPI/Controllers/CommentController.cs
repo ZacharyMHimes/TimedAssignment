@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimedAssignment.Models.Comment;
 using TimedAssignment.Services.Comment;
@@ -17,7 +18,7 @@ namespace TimedAssignment.WebAPI.Controllers
         {
             _commentService = commentService;
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateComment([FromBody] CommentCreate model)
         {

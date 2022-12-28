@@ -30,6 +30,7 @@ namespace TimedAssignment.Services.Post
         {
             var entity = new PostEntity
             {
+                AuthorId = _userId,
                 Title = request.Title,
                 Text = request.Text
             };

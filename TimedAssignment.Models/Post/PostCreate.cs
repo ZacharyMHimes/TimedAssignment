@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TimedAssignment.Models.Post
 {
     public class PostCreate
-    {
+    { 
         [Required]
         [MinLength
             (2, ErrorMessage = "{0} must be at least {1} characters long.")]
