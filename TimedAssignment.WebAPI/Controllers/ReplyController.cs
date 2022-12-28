@@ -27,6 +27,8 @@ namespace TimedAssignment.WebAPI.Controllers
 
             if (await _replyService.CreateReplyAsync(request))
             return Ok("Reply created successfully.");
+
+            return BadRequest();
         }
 
         [HttpGet]

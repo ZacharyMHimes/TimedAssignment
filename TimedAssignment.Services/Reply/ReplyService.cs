@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using TimedAssignment.Data;
 using TimedAssignment.Data.Entities;
@@ -12,7 +14,7 @@ namespace TimedAssignment.Services.Reply
     public class ReplyService : IReplyService
     {
         private readonly ApplicationDbContext _context;
-        private int? _userId;
+        private int _userId;
         private object _dbContext;
 
         public ReplyService(IHttpContextAccessor httpContextAccessor, ApplicationDbContext context)
