@@ -20,7 +20,7 @@ namespace TimedAssignment.Data.Entities
         //Author Foreign Key Code
         [Required]
         [ForeignKey (nameof(Author))]
-        int AuthorId {get; set;}
+        public int AuthorId {get; set;}
         public UserEntity Author {get; set;}
     }
 }

@@ -9,5 +9,6 @@ namespace TimedAssignment.Services.Post
     public interface IPostService
     {
         public Task<bool> CreatePostAsync(PostCreate request);
+        public Task<IEnumerable<PostListItem>> GetAllPostsAsync();
     }
 }
