@@ -24,7 +24,7 @@ namespace TimedAssignment.Services.Reply
                 throw new Exception("Attempted to build Reply Service without User Id claim.");
 
             _dbContext = context;
-
+        }
         public async Task<bool> CreateReplyAsync(ReplyCreate request)
         {
             var replyEntity = new ReplyEntity 
