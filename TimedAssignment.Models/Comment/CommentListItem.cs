@@ -11,8 +11,8 @@ namespace TimedAssignment.Models.Comment
         public int ParentPostId {get; set;}
         public string Text {get;set;}
         public int AuthorId {get; set;}
+        public string AuthorUsername {get; set;}
         public DateTimeOffset CreatedUTC {get;set;}
         public DateTimeOffset? ModifiedUTC {get; set;}
-
     }
 }
