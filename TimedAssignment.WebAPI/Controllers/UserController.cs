@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TimedAssignment.Models.Token;
@@ -52,8 +53,10 @@ namespace TimedAssignment.WebAPI.Controllers
         
         return BadRequest("User could not be registered.");
     }
+
+    [Authorize]
     [HttpGet("{userId:int}")]
-    public async Task<IActionResult> GetById([FromRoute] int userId)
+    public async Task<IActionResult> GetById([FromRoute] int userId) 
     {
         var userDetail = await _userService.GetUserByIdAsync(userId);
 

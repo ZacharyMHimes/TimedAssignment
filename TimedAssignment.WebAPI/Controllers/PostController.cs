@@ -22,7 +22,7 @@ namespace TimedAssignment.WebAPI.Controllers
             _postService = postService;
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreatePost([FromBody] PostCreate request)
         {
@@ -41,9 +41,9 @@ namespace TimedAssignment.WebAPI.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> GetAllPosts()
-            {
-                var posts = await _postService.GetAllPostsAsync();
-                return Ok();
-            }
+        {
+            var posts = await _postService.GetAllPostsAsync();
+            return Ok();
+        }
     }
 }
