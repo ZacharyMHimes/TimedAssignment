@@ -22,7 +22,7 @@ namespace TimedAssignment.Services.Post
             var value = userClaims.FindFirst("Id")?.Value;
             var validId = int.TryParse(value, out _userId);
             if(!validId)
-                throw new Exception("Attempted to build NoteService without User Id claim.");
+                throw new Exception("Attempted to build Post Service without User Id claim.");
 
             _context = context;   
         }
@@ -51,7 +51,7 @@ namespace TimedAssignment.Services.Post
                 })
                 .ToListAsync();
             
-                return posts;
+            return posts;
         }
     }
 }
