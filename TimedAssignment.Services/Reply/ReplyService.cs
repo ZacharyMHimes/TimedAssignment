@@ -13,11 +13,18 @@ namespace TimedAssignment.Services.Reply
     {
         private readonly ApplicationDbContext _context;
         private int? _userId;
+        private object _dbContext;
 
-        public ReplyService(ApplicationDbContext context)
-            {
-                _context = context;
-            }
+        public ReplyService(IHttpContextAccessor httpContextAccessor, ApplicationDbContext context)
+        {
+            var userClaims = httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+            var value = userClaims.FindFirst("Id")?.Value;
+            var validId = int.TryParse(value, out _userId);
+            if (!validId)
+                throw new Exception("Attempted to build Reply Service without User Id claim.");
+
+            _dbContext = context;
+
         public async Task<bool> CreateReplyAsync(ReplyCreate request)
         {
             var replyEntity = new ReplyEntity 
@@ -28,9 +35,9 @@ namespace TimedAssignment.Services.Reply
                 AuthorId = _userId, 
             };
 
-            _context.Reply.Add(replyEntity);
+            _dbContext.Reply.Add(replyEntity);
 
-            var numberOfChanges = await _context.SaveChangesAsync();
+            var numberOfChanges = await _dbContext.SaveChangesAsync();
             return numberOfChanges == 1;
         }
 
@@ -51,7 +58,7 @@ namespace TimedAssignment.Services.Reply
 
         public async Task<ReplyDetail> GetReplyIdAsync(int replyId)
         {
-            var replyEntity = await _context.Reply.FirstOrDefaultAsync(e =>
+            var replyEntity = await _dbContext.Reply.FirstOrDefaultAsync(e =>
             e.Id == replyId && e.AuthorId == _userId);
 
             return replyEntity is null ? null : new ReplyDetail
@@ -66,7 +73,7 @@ namespace TimedAssignment.Services.Reply
 
         public async Task<bool> UpdateReplyAsync(ReplyUpdate request)
         {
-            var replyEntity = await _context.Reply.FindAsync(request.AuthorId);
+            var replyEntity = await _dbContext.Reply.FindAsync(request.AuthorId);
 
             if (replyEntity?.AuthorId != _userId)
                 return false;
@@ -75,20 +82,20 @@ namespace TimedAssignment.Services.Reply
             replyEntity.ParentCommentId = request.ParentCommentId;
             replyEntity.ModifiedUtc = DateTimeOffset.Now;
 
-            var numberOfChanges = await _context.SaveChangesAsync();
+            var numberOfChanges = await _dbContext.SaveChangesAsync();
 
             return numberOfChanges == 1;
         }
 
         public async Task<bool> DeleteReplyAsync(int replyId)
         {
-            var replyEntity = await _context.Reply.FindAsync(replyId);
+            var replyEntity = await _dbContext.Reply.FindAsync(replyId);
 
             if (replyEntity?.AuthorId != _userId)
                 return false;
             
-            _context.Reply.Remove(replyEntity);
-            return await _context.SaveChangesAsync() == 1;
+            _dbContext.Reply.Remove(replyEntity);
+            return await _dbContext.SaveChangesAsync() == 1;
         } 
     }
 }
