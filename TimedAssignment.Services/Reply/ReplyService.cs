@@ -15,7 +15,7 @@ namespace TimedAssignment.Services.Reply
     {
         private readonly ApplicationDbContext _context;
         private int _userId;
-        private object _dbContext;
+        private ApplicationDbContext _dbContext;
 
         public ReplyService(IHttpContextAccessor httpContextAccessor, ApplicationDbContext context)
         {
@@ -63,7 +63,7 @@ namespace TimedAssignment.Services.Reply
             var replyEntity = await _dbContext.Reply.FirstOrDefaultAsync(e =>
             e.Id == replyId && e.AuthorId == _userId);
 
-            return replyEntity is null ? null : new ReplyDetail
+            return (replyEntity is null) ? null : new ReplyDetail
             {
                 AuthorId = replyEntity.AuthorId,
                 Text = replyEntity.Text,
