@@ -24,5 +24,6 @@ namespace TimedAssignment.Data.Entities
         [ForeignKey(nameof(Author))]
         public int AuthorId { get; set; }
         public UserEntity Author { get; set; }
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }
