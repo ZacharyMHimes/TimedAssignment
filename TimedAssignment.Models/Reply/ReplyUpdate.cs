@@ -21,5 +21,6 @@ namespace TimedAssignment.Models.Reply
         [MaxLength
             (8000, ErrorMessage = "{0} must contain no more than {1} characters.")]
         public int AuthorId { get; set; }
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }

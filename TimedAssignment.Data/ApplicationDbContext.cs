@@ -17,6 +17,6 @@ namespace TimedAssignment.Data
         public DbSet<PostEntity> Post {get; set;}  
         public DbSet<CommentEntity> Comment {get; set;}
         public DbSet<ReplyEntity> Reply {get; set;}
-        
+        public IEnumerable<object> Replies { get; set; }
     }
 }

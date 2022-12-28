@@ -10,5 +10,6 @@ namespace TimedAssignment.Models.Reply
         public int Id { get; set; }
         public string Text { get; set; }
         public DateTimeOffset CreatedUtc {get; set;}
+        public object AuthorId { get; set; }
     }
 }
