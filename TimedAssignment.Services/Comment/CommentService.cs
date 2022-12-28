@@ -1,7 +1,9 @@
+using System.Security.Claims;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using TimedAssignment.Data;
 using TimedAssignment.Data.Entities;
@@ -12,18 +14,28 @@ namespace TimedAssignment.Services.Comment
     public class CommentService : ICommentService
     {
         private readonly ApplicationDbContext _dbContext;
-        public CommentService(ApplicationDbContext context)
+        private readonly int _userId;
+        public CommentService(IHttpContextAccessor httpContextAccessor, ApplicationDbContext context)
         {
+            var userClaims = httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+            var value = userClaims.FindFirst("Id")?.Value;
+            var validId = int.TryParse(value, out _userId);
+            if (!validId)
+                throw new Exception("Attempted to build Comment Service without User Id claim.");
+
             _dbContext = context;
         }
-
+        // [Authorize]
         //Create
         public async Task<bool> CreateCommentAsync(CommentCreate request)
         {
+            if (_userId != request.AuthorId)
+                return false;
+
             var commentEntity = new CommentEntity {
                 Text = request.Text,
                 PostId = request.ParentPostId,
-                AuthorId = request.AuthorId ,
+                AuthorId = request.AuthorId,
                 CreatedUTC = DateTimeOffset.Now
             };
 
@@ -37,7 +49,7 @@ namespace TimedAssignment.Services.Comment
         public async Task<List<CommentListItem>> GetCommentsByPostIdAsync(int postId)
         {
             var comments = await _dbContext.Comment
-                .Where( commentEntity => commentEntity.PostId == postId)
+                .Where( commentEntity => commentEntity.PostId == postId )
                 .Select( commentEntity => new CommentListItem {
                     Id = commentEntity.Id,
                     ParentPostId = commentEntity.PostId,
