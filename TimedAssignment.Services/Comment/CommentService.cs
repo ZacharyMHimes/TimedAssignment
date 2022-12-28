@@ -23,7 +23,8 @@ namespace TimedAssignment.Services.Comment
             var commentEntity = new CommentEntity {
                 Text = request.Text,
                 PostId = request.ParentPostId,
-                AuthorId = request.AuthorId
+                AuthorId = request.AuthorId ,
+                CreatedUTC = DateTimeOffset.Now
             };
 
             _dbContext.Comment.Add(commentEntity);
@@ -41,13 +42,14 @@ namespace TimedAssignment.Services.Comment
                     Id = commentEntity.Id,
                     ParentPostId = commentEntity.PostId,
                     AuthorId = commentEntity.AuthorId,
+                    AuthorUsername = commentEntity.Author.Username,
                     Text = commentEntity.Text,
                     CreatedUTC = commentEntity.CreatedUTC,
                     ModifiedUTC = commentEntity.ModifiedUTC 
                 } )
                 .ToListAsync();
             
-            return  comments;
+            return comments;
 
         }
         //Update
