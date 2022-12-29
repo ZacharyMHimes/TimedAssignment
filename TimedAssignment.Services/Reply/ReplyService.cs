@@ -43,20 +43,20 @@ namespace TimedAssignment.Services.Reply
             return numberOfChanges == 1;
         }
 
-        public async Task<IEnumerable<ReplyListItem>> GetAllRepliesAsync()
-        {
-            var replies = await _context.Replies
-                .Where(entity => entity.AuthorId == _userId)
-                .Select(entity => new ReplyListItem
-                {
-                AuthorId = entity.AuthorId,
-                Text = entity.Text,
-                CreatedUtc = entity.CreatedUtc
-            })
-            .ToListAsync();
+        // public async Task<IEnumerable<ReplyListItem>> GetAllRepliesAsync()
+        // {
+        //     var replies = await _context.Replies
+        //         .Where(entity => entity.AuthorId == _userId)
+        //         .Select(entity => new ReplyListItem
+        //         {
+        //         AuthorId = entity.AuthorId,
+        //         Text = entity.Text,
+        //         CreatedUtc = entity.CreatedUtc
+        //     })
+        //     .ToListAsync();
 
-            return replies;
-        }
+        //     return replies;
+        // }
 
         public async Task<ReplyDetail> GetReplyIdAsync(int replyId)
         {

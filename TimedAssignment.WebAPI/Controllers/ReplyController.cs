@@ -34,7 +34,7 @@ namespace TimedAssignment.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllReplies()
         {
-            var replies = await _replyService.GetAllRepliesAsync();
+            // var replies = await _replyService.GetAllRepliesAsync();
             return Ok();
         }
 
